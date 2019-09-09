@@ -1,2 +1,2 @@
 # CommonKeyboard
-Coming soon!
+An elegant Keyboard library for iOS.

@@ -1,0 +1,6 @@
+framework module CommonKeyboard {
+  umbrella header "CommonKeyboard-umbrella.h"
+
+  export *
+  module * { export * }
+}
