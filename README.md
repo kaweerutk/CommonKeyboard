@@ -4,8 +4,8 @@ An elegant Keyboard library for iOS.
 ![Swift](https://img.shields.io/badge/Swift-4.2.0-green.svg)
 ![Swift](https://img.shields.io/badge/License-MIT-green.svg)
 
-![CommonKeyboard](https://user-images.githubusercontent.com/7533178/64527021-728cc180-d337-11e9-99d0-4acd3fd339d3.gif)
-![CommonKeyboardObserver](https://user-images.githubusercontent.com/7533178/64527035-7ae4fc80-d337-11e9-96c5-607ae3428ba4.gif)
+![CommonKeyboard](https://user-images.githubusercontent.com/7533178/64553337-c5806c00-d36b-11e9-8fa6-e2cc5c4e1371.gif)
+![CommonKeyboardObserver](https://user-images.githubusercontent.com/7533178/64553367-d204c480-d36b-11e9-881d-0974d81e4619.gif)
 
 ## Installation
 
@@ -75,7 +75,7 @@ class ExampleChatViewController: UIViewController {
             if info.isShowing {
                 bottom = -info.visibleHeight
                 if #available(iOS 11, *) {
-                    bottom += safeAreaInsets.bottom
+                    bottom += weakSelf.view.safeAreaInsets.bottom
                 }
             }
             UIView.animate(info, animations: { [weak self] in
@@ -104,7 +104,7 @@ public enum CommonKeyboardObserverEvent {
 Sometimes there are many UIScrollView containers in UI Stack View and the CommonKeyboard cannot find the right one you can implement `CommonKeyboardContainerProtocol` and return specific container
 
 ```swift
-extension ChatViewController: CommonKeyboardContainerProtocol {
+extension ExampleChatViewController: CommonKeyboardContainerProtocol {
     // return specific scrollView
     // UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
     var scrollViewContainer: UIScrollView {
@@ -116,11 +116,11 @@ extension ChatViewController: CommonKeyboardContainerProtocol {
 Others
 
 ```swift
-    // dismiss keyboard
-    CommonKeyboard.shared.dismiss()
+  // dismiss keyboard
+  CommonKeyboard.shared.dismiss()
 
-    // get current UIResponder
-    let responder = CommonKeyboard.shared.currentResponder
+  // get current UIResponder
+  let responder = CommonKeyboard.shared.currentResponder
 ```
 
 ## Requirements
