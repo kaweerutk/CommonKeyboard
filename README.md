@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 `CommonKeyboard` will automatically scroll to input view when the cursor focused. This working with UIScrollView and all inheritance classes including UITableView and UICollectionView
-(Note: This does not work with `UITableViewController` because it will handle by itself)
+(<strong>Note:</strong> This does not work with `UITableViewController` because it will handle offset by itself)
 
-You can adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or you can ignore keyboard handle by giving `ignoredCommonKeyboard` a true value.
+Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
 
 ```swift
   textField.keyboardOffset = 20
@@ -54,7 +54,7 @@ You can adjust an offset between keyboard and input view by set `keyboardOffset`
 ```
 
 #### CommonKeyboardObserver
-Subscribe `CommonKeyboardObserver` to get keyboard notification info.
+You can subscribe `CommonKeyboardObserver` to get keyboard notification info.
 
 ```swift
 import CommonKeyboard
@@ -88,7 +88,20 @@ class ExampleChatViewController: UIViewController {
 }
 ```
 
-Sometimes there are many UIScrollView containers in UI Stack View and the CommonKeyboard cannot find the right container you can implement `CommonKeyboardContainerProtocol` and return specific container
+All events
+```swift
+public enum CommonKeyboardObserverEvent {
+    case willShow
+    case didShow
+    case willHide
+    case didHide
+    case willChangeFrame
+    case didChangeFrame
+    case dragDown // scroll.keyboardDismissMode = .interactive
+}
+```
+
+Sometimes there are many UIScrollView containers in UI Stack View and the CommonKeyboard cannot find the right one you can implement `CommonKeyboardContainerProtocol` and return specific container
 
 ```swift
 extension ChatViewController: CommonKeyboardContainerProtocol {
@@ -98,6 +111,16 @@ extension ChatViewController: CommonKeyboardContainerProtocol {
         return tableView
     }
 }
+```
+
+Others
+
+```swift
+    // dismiss keyboard
+    CommonKeyboard.shared.dismiss()
+
+    // get current UIResponder
+    let responder = CommonKeyboard.shared.currentResponder
 ```
 
 ## Requirements
