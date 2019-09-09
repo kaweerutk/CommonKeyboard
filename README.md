@@ -4,6 +4,9 @@ An elegant Keyboard library for iOS.
 ![Swift](https://img.shields.io/badge/Swift-4.2.0-green.svg)
 ![Swift](https://img.shields.io/badge/License-MIT-green.svg)
 
+![CommonKeyboard](https://user-images.githubusercontent.com/7533178/64527021-728cc180-d337-11e9-99d0-4acd3fd339d3.gif)
+![CommonKeyboardObserver](https://user-images.githubusercontent.com/7533178/64527035-7ae4fc80-d337-11e9-96c5-607ae3428ba4.gif)
+
 ## Installation
 
 #### [CocoaPods](https://cocoapods.org/)
