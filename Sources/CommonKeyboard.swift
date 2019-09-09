@@ -179,7 +179,7 @@ extension CommonKeyboard: UIGestureRecognizerDelegate {
 }
 
 fileprivate extension UIView {
-    fileprivate var backwardSafeAreaInsets: UIEdgeInsets {
+    var backwardSafeAreaInsets: UIEdgeInsets {
         if #available(iOS 11, *) {
             return safeAreaInsets
         }

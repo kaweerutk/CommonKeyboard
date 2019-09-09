@@ -19,7 +19,7 @@ private let DefaultIgnoredCommonKeyboard: Bool = false
 
 public extension UITextField {
     @IBInspectable
-    public var keyboardOffset: CGFloat {
+    var keyboardOffset: CGFloat {
         get {
             return (objc_getAssociatedObject(self, &KeyboardOffsetAssociatedKey) as? CGFloat) ?? DefaultKeyboardOffset
         }
@@ -29,7 +29,7 @@ public extension UITextField {
     }
     
     @IBInspectable
-    public var ignoredCommonKeyboard: Bool {
+    var ignoredCommonKeyboard: Bool {
         get {
             return (objc_getAssociatedObject(self, &IgnoredCommonKeyboardAssociatedKey) as? Bool) ?? DefaultIgnoredCommonKeyboard
         }
@@ -41,7 +41,7 @@ public extension UITextField {
 
 public extension UITextView {
     @IBInspectable
-    public var keyboardOffset: CGFloat {
+    var keyboardOffset: CGFloat {
         get {
             return (objc_getAssociatedObject(self, &KeyboardOffsetAssociatedKey) as? CGFloat) ?? DefaultKeyboardOffset
         }
@@ -51,7 +51,7 @@ public extension UITextView {
     }
     
     @IBInspectable
-    public var ignoredCommonKeyboard: Bool {
+    var ignoredCommonKeyboard: Bool {
         get {
             return (objc_getAssociatedObject(self, &IgnoredCommonKeyboardAssociatedKey) as? Bool) ?? false
         }
@@ -64,7 +64,7 @@ public extension UITextView {
 // MARK: - UIView
 
 public extension UIView {
-    public static func animate(
+    static func animate(
         _ keyboardNotificationInfo: CommonKeyboardNotificationInfo,
         delay: TimeInterval = 0,
         animations: @escaping () -> Void,

@@ -53,7 +53,7 @@ internal class CKUtility: CKUtilityProtocol {
 }
 
 fileprivate extension UIWindow {
-    fileprivate func getTopViewController(_ baseViewController: UIViewController? = nil) -> UIViewController? {
+    func getTopViewController(_ baseViewController: UIViewController? = nil) -> UIViewController? {
         let vc = baseViewController ?? rootViewController
         if let tabBarViewController = vc as? UITabBarController {
             return getTopViewController(tabBarViewController.selectedViewController)

@@ -46,8 +46,8 @@ public struct CommonKeyboardObserverItem: Hashable {
         return lhs.hashValue == rhs.hashValue
     }
     
-    public var hashValue: Int {
-        return notificationObservers.description.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(notificationObservers.description)
     }
 }
 
