@@ -26,6 +26,7 @@ public class CommonKeyboard: NSObject {
     internal var keyboardObserver: CommonKeyboardObserverProtocol
     internal var tapGesture: UITapGestureRecognizer?
     internal var prevScrollInsetBottom: CGFloat?
+    internal var keyboardShowed: Bool = false
     
     private override init() {
         self.utility = CKUtility()
@@ -47,6 +48,7 @@ public class CommonKeyboard: NSObject {
     }
     
     @objc public func dismiss() {
+        guard keyboardShowed else { return }
         UIApplication.shared.sendAction(#selector(UIView.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
@@ -75,9 +77,15 @@ public class CommonKeyboard: NSObject {
             }
         }
         
+        // keyboard didShow
+        keyboardObserver.subscribe(events: [.didShow]) { [weak self] (_) in
+            self?.keyboardShowed = true
+        }
+        
         // keyboard willHide
         keyboardObserver.subscribe(events: [.willHide]) { [weak self] (info) in
             guard let weakSelf = self else { return }
+            weakSelf.keyboardShowed = false
             let topVC = weakSelf.utility.topViewController
             if let tapGesture = weakSelf.tapGesture {
                 topVC?.view.removeGestureRecognizer(tapGesture)
@@ -86,10 +94,7 @@ public class CommonKeyboard: NSObject {
             let scrollContainer = weakSelf.utility.currentScrollContainer
             guard let bottom = weakSelf.prevScrollInsetBottom else { return }
             weakSelf.prevScrollInsetBottom = nil
-            UIView.animate(info, animations: {
-                scrollContainer?.contentInset.bottom = bottom
-                topVC?.view.layoutIfNeeded()
-            })
+            scrollContainer?.contentInset.bottom = bottom
         }
         
         // keyboard willChangeFrame
