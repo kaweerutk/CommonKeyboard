@@ -1,8 +1,8 @@
 # CommonKeyboard
-An elegant Keyboard library for iOS.
+An elegant Keyboard library for iOS. simple, lightweight and standalone no sub-dependencies required
 
-![Swift](https://img.shields.io/badge/Swift-4.2.0-green.svg)
-![Swift](https://img.shields.io/badge/License-MIT-green.svg)
+![Swift](https://img.shields.io/badge/Swift-4.2.0-orange.svg)
+![Swift](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 
 ![CommonKeyboard](https://user-images.githubusercontent.com/7533178/64553337-c5806c00-d36b-11e9-8fa6-e2cc5c4e1371.gif)
 ![CommonKeyboardObserver](https://user-images.githubusercontent.com/7533178/64553367-d204c480-d36b-11e9-881d-0974d81e4619.gif)
@@ -46,11 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
 
 ```swift
-  textField.keyboardOffset = 20
-  textField.ignoredCommonKeyboard = true
+ textField.keyboardOffset = 20
+ textField.ignoredCommonKeyboard = true
 
-  textView.keyboardOffset = 2
-  textView.ignoredCommonKeyboard = false
+ textView.keyboardOffset = 2
+ textView.ignoredCommonKeyboard = false
 ```
 
 #### CommonKeyboardObserver
@@ -61,6 +61,7 @@ import CommonKeyboard
 
 class ExampleChatViewController: UIViewController {
 
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     let keyboardObserver = CommonKeyboardObserver()
 
@@ -105,8 +106,6 @@ Sometimes there are many UIScrollView containers in UI Stack View and the Common
 
 ```swift
 extension ExampleChatViewController: CommonKeyboardContainerProtocol {
-    // return specific scrollView
-    // UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
     var scrollViewContainer: UIScrollView {
         return tableView
     }
@@ -116,11 +115,11 @@ extension ExampleChatViewController: CommonKeyboardContainerProtocol {
 Others
 
 ```swift
-  // dismiss keyboard
-  CommonKeyboard.shared.dismiss()
+ // dismiss keyboard
+ CommonKeyboard.shared.dismiss()
 
-  // get current UIResponder
-  let responder = CommonKeyboard.shared.currentResponder
+ // get current UIResponder
+ let responder = CommonKeyboard.shared.currentResponder
 ```
 
 ## Requirements
