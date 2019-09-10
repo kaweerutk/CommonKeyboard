@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 `CommonKeyboard` will automatically scroll to input view when the cursor focused. This working with UIScrollView and all inheritance classes including UITableView and UICollectionView
-(<strong>Note:</strong> This does not work with `UITableViewController` because it will handle offset by itself)
+(<strong>Note:</strong> This does not support `UITableViewController` because it will handle by itself)
 
 Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
 
