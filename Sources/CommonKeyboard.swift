@@ -26,7 +26,6 @@ public class CommonKeyboard: NSObject {
     internal var keyboardObserver: CommonKeyboardObserverProtocol
     internal var tapGesture: UITapGestureRecognizer?
     internal var prevScrollInsetBottom: CGFloat?
-    internal var keyboardShowed: Bool = false
     
     private override init() {
         self.utility = CKUtility()
@@ -48,7 +47,6 @@ public class CommonKeyboard: NSObject {
     }
     
     @objc public func dismiss() {
-        guard keyboardShowed else { return }
         UIApplication.shared.sendAction(#selector(UIView.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
@@ -67,28 +65,21 @@ public class CommonKeyboard: NSObject {
     }
     
     private func subscribeKeyboard() {
-        // keyboard willShow
-        keyboardObserver.subscribe(events: [.willShow]) { [weak self] (_) in
-            guard let weakSelf = self else { return }
-            
-            if let topVC = weakSelf.utility.topViewController
-                , let tapGesture = weakSelf.tapGesture {
-                topVC.view.addGestureRecognizer(tapGesture)
-            }
-        }
-        
         // keyboard didShow
         keyboardObserver.subscribe(events: [.didShow]) { [weak self] (_) in
-            self?.keyboardShowed = true
+            guard let weakSelf = self
+                , let topVC = weakSelf.utility.topViewController
+                , let tapGesture = weakSelf.tapGesture else { return }
+            topVC.view.addGestureRecognizer(tapGesture)
         }
         
         // keyboard willHide
         keyboardObserver.subscribe(events: [.willHide]) { [weak self] (info) in
             guard let weakSelf = self else { return }
-            weakSelf.keyboardShowed = false
-            let topVC = weakSelf.utility.topViewController
-            if let tapGesture = weakSelf.tapGesture {
-                topVC?.view.removeGestureRecognizer(tapGesture)
+            
+            if let topVC = weakSelf.utility.topViewController
+             , let tapGesture = weakSelf.tapGesture {
+                topVC.view.removeGestureRecognizer(tapGesture)
             }
             
             let scrollContainer = weakSelf.utility.currentScrollContainer

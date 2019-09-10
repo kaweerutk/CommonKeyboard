@@ -103,8 +103,8 @@ public protocol CommonKeyboardObserverProtocol {
 
 public class CommonKeyboardObserver: CommonKeyboardObserverProtocol {
     
-    private var observers = Set<CommonKeyboardObserverItem>()
-    private var operationQueue = OperationQueue()
+    private var observers: Set<CommonKeyboardObserverItem>
+    private var operationQueue: OperationQueue
     
     public init() {
         observers = Set<CommonKeyboardObserverItem>()
@@ -210,13 +210,13 @@ internal class PanGestureWorker: NSObject, UIGestureRecognizerDelegate {
         guard panRecognizer == nil else { return }
         let pan = UIPanGestureRecognizer(target: self, action: #selector(PanGestureWorker.drag(_:)))
         pan.delegate = self
-        utility.topViewController?.view?.addGestureRecognizer(pan)
+        utility.currentWindow?.addGestureRecognizer(pan)
         panRecognizer = pan
     }
     
     private func removeGesture() {
         guard let pan = panRecognizer else { return }
-        utility.topViewController?.view?.removeGestureRecognizer(pan)
+        utility.currentWindow?.removeGestureRecognizer(pan)
         panRecognizer = nil
     }
     
@@ -225,13 +225,10 @@ internal class PanGestureWorker: NSObject, UIGestureRecognizerDelegate {
             , let lastKeyboardInfo = lastKeyboardInfo else {
                 return
         }
-        let origin = panGestureRecognizer.location(in: window)
+        let point = panGestureRecognizer.location(in: window)
         let lastKeyboardFrame = lastKeyboardInfo.keyboardFrameEnd
         var newKeyboardFrame = lastKeyboardFrame
-        newKeyboardFrame.origin.y = max(origin.y, lastKeyboardFrame.origin.y)
-        guard newKeyboardFrame.origin.y != lastKeyboardFrame.origin.y else {
-            return
-        }
+        newKeyboardFrame.origin.y = max(point.y, lastKeyboardFrame.origin.y)
         
         var keyboardInfo: [String : Any] = [
             UIResponder.keyboardFrameBeginUserInfoKey: newKeyboardFrame,
