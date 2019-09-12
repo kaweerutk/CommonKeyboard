@@ -21,7 +21,7 @@ Add the following to your `Cartfile`
 github "kaweerutk/CommonKeyboard"
 ````
 
-## Using
+## Usage
 In AppDelegate.swift, just `import CommonKeyboard` framework and enable CommonKeyboard.
 ```swift
 import CommonKeyboard
@@ -33,14 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        // Just enabled a single line of code
+        // Just enable a single line of code
         CommonKeyboard.shared.enabled = true
 
         return true
     }
 }
 ```
-`CommonKeyboard` will automatically scroll to input view when the cursor focused. This working with UIScrollView and all inheritance classes including UITableView and UICollectionView
+`CommonKeyboard` will automatically scroll to the input view when the cursor focused and tapping on a space to dismiss keyboard. This working with UIScrollView and all inheritance classes including UITableView and UICollectionView
 (<strong>Note:</strong> This does not support `UITableViewController` because it will handle by itself)
 
 Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
