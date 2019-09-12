@@ -103,8 +103,8 @@ public protocol CommonKeyboardObserverProtocol {
 
 public class CommonKeyboardObserver: CommonKeyboardObserverProtocol {
     
-    private var observers: Set<CommonKeyboardObserverItem>
-    private var operationQueue: OperationQueue
+    internal var observers: Set<CommonKeyboardObserverItem>
+    internal var operationQueue: OperationQueue
     
     public init() {
         observers = Set<CommonKeyboardObserverItem>()
@@ -112,6 +112,9 @@ public class CommonKeyboardObserver: CommonKeyboardObserverProtocol {
         operationQueue.maxConcurrentOperationCount = 1
         operationQueue.qualityOfService = .userInteractive
         operationQueue.name = "CommonKeyboardObserver"
+        DispatchQueue.main.async {
+            _ = PanGestureWorker.shared
+        }
     }
     
     deinit {

@@ -31,7 +31,6 @@ public class CommonKeyboard: NSObject {
         self.utility = CKUtility()
         self.keyboardObserver = CommonKeyboardObserver()
         super.init()
-        _ = PanGestureWorker.shared
     }
     
     // for testing
@@ -39,7 +38,6 @@ public class CommonKeyboard: NSObject {
         self.utility = utility
         self.keyboardObserver = keyboardObserver
         super.init()
-        _ = PanGestureWorker.shared
     }
     
     public var currentResponder: UIResponder? {
