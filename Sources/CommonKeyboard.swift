@@ -130,10 +130,9 @@ public class CommonKeyboard: NSObject {
             ? getScrollUpContentOffset(scrollContainer: scrollContainer, diff: diff)
             : getScrollDownContentOffset(scrollContainer: scrollContainer, diff: diff)
 
+        scrollContainer.contentInset = newContentInset
         UIView.animate(keyboardInfo, animations: {
             scrollContainer.setContentOffset(newContentOffset, animated: false)
-        }, completion: { (_) in
-            scrollContainer.contentInset = newContentInset
         })
     }
     
