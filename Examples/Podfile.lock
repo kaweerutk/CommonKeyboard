@@ -1,5 +1,5 @@
 PODS:
-  - CommonKeyboard (1.0.0)
+  - CommonKeyboard (1.0.4)
 
 DEPENDENCIES:
   - CommonKeyboard (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CommonKeyboard: f5e6f7cc795fbbefe44efd6b63ccaeb65fb42b27
+  CommonKeyboard: ed9c85e008ff5788a3207c10e366566dd7cb80b2
 
 PODFILE CHECKSUM: f2d82125587b173f8dedc39605479f314a5594d4
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.10.1
