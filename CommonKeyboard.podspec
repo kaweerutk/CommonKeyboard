@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name = 'CommonKeyboard'
-  s.version = '1.0.4'
+  s.version = '1.0.5'
   s.license = { :type => "MIT", :file => "LICENSE.md" }
 
   s.summary = 'An elegant Keyboard library for iOS.'
   s.homepage = 'https://github.com/kaweerutk/CommonKeyboard'
-  s.author = { "Kaweerut Kanthawong" => "kaweerutkanthawong@yahoo.com" }
+  s.author = { "Kaweerut Kanthawong" => "iamkevinjoon@gmail.com" }
   s.source = { :git => 'https://github.com/kaweerutk/CommonKeyboard.git', :tag => s.version }
   s.source_files = 'Sources/*.swift'
 
