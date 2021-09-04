@@ -13,6 +13,8 @@ internal protocol CKUtilityProtocol {
     var currentWindow: UIWindow? { get }
     var topViewController: UIViewController? { get }
     var currentScrollContainer: UIScrollView? { get }
+    var inputHostView: UIView? { get }
+    var inputAssistantView: UIView? { get }
 }
 
 internal class CKUtility: CKUtilityProtocol {
@@ -49,6 +51,23 @@ internal class CKUtility: CKUtilityProtocol {
         }
         
         return scrollView
+    }
+    
+    var inputHostView: UIView? {
+      return UIApplication.shared
+        .windows.first {
+          NSStringFromClass($0.classForCoder) == "UIRemoteKeyboardWindow"
+        }?.subviews.first {
+          NSStringFromClass($0.classForCoder) == "UIInputSetContainerView"
+        }?.subviews.first {
+          NSStringFromClass($0.classForCoder) == "UIInputSetHostView"
+        }
+    }
+  
+    var inputAssistantView: UIView? {
+      inputHostView?.subviews.first {
+        NSStringFromClass($0.classForCoder) == "TUISystemInputAssistantView"
+      }
     }
 }
 

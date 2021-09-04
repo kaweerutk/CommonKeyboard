@@ -198,16 +198,31 @@ internal class PanGestureWorker: NSObject, UIGestureRecognizerDelegate {
     }
     
     private func setup() {
-        keyboardObserver.subscribe(events: [.willShow, .willHide, .willChangeFrame]) { [weak self] (info) in
-            guard let weakSelf = self else { return }
-            weakSelf.lastKeyboardInfo = info
+        keyboardObserver.subscribe(events: [.willShow, .willHide, .didHide, .willChangeFrame]) { [weak self] (info) in
+            guard let self = self else { return }
+            self.lastKeyboardInfo = info
             if info.isShowing {
-                weakSelf.addGesture()
+                self.addGesture()
             } else {
-                weakSelf.removeGesture()
+                self.removeGesture()
             }
+            self.configureKeyboardAssistantView(info: info)
         }
     }
+  
+  private func configureKeyboardAssistantView(info: CommonKeyboardNotificationInfo) {
+    guard
+        let inputHostView = utility.inputHostView,
+        let assistantView = utility.inputAssistantView
+    else { return }
+    if info.isShowing {
+        inputHostView.frame = info.keyboardFrameEnd
+        assistantView.alpha = 1
+    } else {
+        inputHostView.frame.origin.y += assistantView.frame.height
+        assistantView.alpha = 0
+    }
+  }
     
     private func addGesture() {
         guard panRecognizer == nil else { return }
