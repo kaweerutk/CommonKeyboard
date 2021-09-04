@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // *** This doesn't work with UITableViewController because they've a built-in handler ***
     //
     CommonKeyboard.shared.enabled = true
+    
+    // uncomment this line to print out the debug logs
+    //CommonKeyboard.shared.debug = true
     return true
   }
   

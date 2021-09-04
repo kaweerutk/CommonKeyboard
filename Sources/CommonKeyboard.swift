@@ -15,6 +15,8 @@ public protocol CommonKeyboardContainerProtocol: class {
 public class CommonKeyboard: NSObject {
   public static let shared = CommonKeyboard()
   
+  public var debug: Bool = false
+  
   public var enabled: Bool = false {
     didSet {
       guard (enabled != oldValue) else { return }
@@ -88,9 +90,13 @@ public class CommonKeyboard: NSObject {
     
     // keyboard willChangeFrame
     keyboardObserver.subscribe(events: [.willChangeFrame]) { [weak self] (info) in
+      guard let self = self else { return }
+      if self.debug {
+        self.printDebugDescription(info: info)
+      }
+      
       guard
         info.isShowing,
-        let self = self,
         let responsederView = self.currentResponder as? UIView,
         let scrollContainer = self.utility.currentScrollContainer,
         let window = self.utility.currentWindow,
@@ -161,12 +167,37 @@ public class CommonKeyboard: NSObject {
     }
     return newContentOffset
   }
-  
 }
 
 extension CommonKeyboard: UIGestureRecognizerDelegate {
   public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
     return !(touch.view is UIControl)
+  }
+}
+
+extension CommonKeyboard {
+  private func printDebugDescription(info: CommonKeyboardNotificationInfo) {
+    print("----- CommonKeyboard debug enabled -----")
+    print("- isShowing: ", info.isShowing)
+    print("- keyboardFrameBegin: ", info.keyboardFrameBegin)
+    print("- keyboardFrameEnd: ", info.keyboardFrameEnd)
+    print("- visibleHeight: ", info.visibleHeight)
+    print("- isLocal: ", info.isLocal ?? false)
+    if let scrollContainer = utility.currentScrollContainer {
+      print("- scrollContainer: ", scrollContainer.description)
+    } else {
+      let noContainerMessage = """
+        \n \
+        ***** \n \
+          COULD NOT FIND `scrollContainer` \n \
+          YOU BETTER TO IMPLEMENT `CommonKeyboardContainerProtocol` \n \
+          IN `topViewController` (\(utility.topViewController?.description ?? "nil") \n \
+          TO RETURN SPECIFIC `scrollContainer` \n \
+        *****
+      """
+      print("- scrollContainer: ", noContainerMessage)
+    }
+    print("------")
   }
 }
 

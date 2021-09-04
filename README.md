@@ -14,7 +14,7 @@ Add the following to your `Podfile`
 ````
 pod 'CommonKeyboard', :git => 'https://github.com/kaweerutk/CommonKeyboard.git', :tag => '1.0.5'
 ````
-
+***  Note: I lost my `cocoapods trunk` account because I cannot figure out my yahoo email password :( so you have to specify `:git` and `:tag` to get the latest version of the CommonKeyboard
 #### [Carthage](https://github.com/Carthage/Carthage)
 Add the following to your `Cartfile`
 ````
@@ -110,7 +110,7 @@ extension ExampleChatViewController: CommonKeyboardContainerProtocol {
 }
 ```
 
-Others
+Misc
 
 ```swift
  // dismiss keyboard
@@ -118,6 +118,45 @@ Others
 
  // get current UIResponder
  let responder = CommonKeyboard.shared.currentResponder
+```
+
+Debugging
+
+```swift
+// enable debug mode to print out keyboard info
+ CommonKeyboard.shared.debug = true
+
+
+// ** Sample output **
+/*
+----- CommonKeyboard debug enabled -----
+- isShowing:  true
+- keyboardFrameBegin:  (0.0, 896.0, 414.0, 243.0)
+- keyboardFrameEnd:  (0.0, 550.0, 414.0, 346.0)
+- visibleHeight:  346.0
+- isLocal:  true
+- scrollContainer:  <UITableView: 0x103820e00; frame = (0 92; 414 700); clipsToBounds = YES; autoresize = RM+BM; gestureRecognizers = <NSArray: 0x28223a310>; layer = <CALayer: 0x282cf2960>; contentOffset: {0, 0}; contentSize: {414, 0}; adjustedContentInset: {0, 0, 0, 0}; dataSource: (null)>
+------
+*/
+
+// ** Sample output incase CommonKeyboard could not find `scrollContainer` **
+
+/*
+ ----- CommonKeyboard debug enabled -----
+- isShowing:  true
+- keyboardFrameBegin:  (0.0, 896.0, 414.0, 243.0)
+- keyboardFrameEnd:  (0.0, 550.0, 414.0, 346.0)
+- visibleHeight:  346.0
+- isLocal:  true
+- scrollContainer:    
+   ***** 
+     COULD NOT FIND `scrollContainer` 
+     YOU BETTER TO IMPLEMENT `CommonKeyboardContainerProtocol` 
+     IN `topViewController` (<KeyboardExample.FormViewController: 0x10570a150> 
+     TO RETURN SPECIFIC `scrollContainer` 
+   *****
+------
+*/
 ```
 
 ## Requirements
