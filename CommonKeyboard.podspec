@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'CommonKeyboard'
-  s.version = '1.0.5'
+  s.version = '1.0.6'
   s.license = { :type => "MIT", :file => "LICENSE.md" }
 
   s.summary = 'An elegant Keyboard library for iOS.'
