@@ -14,7 +14,7 @@ Add the following to your `Podfile`
 ````
 pod 'CommonKeyboard', :git => 'https://github.com/kaweerutk/CommonKeyboard.git', :tag => '1.0.6'
 ````
-***  Note: I lost my `cocoapods trunk` account because I cannot figure out my yahoo email password :( so you have to specify `:git` and `:tag` to get the latest version of the CommonKeyboard
+***  Note: I lost my `cocoapods trunk` account because I cannot figure out what my yahoo email password is :( so you have to specify `:git` and `:tag` to get the latest version of the CommonKeyboard
 #### [Carthage](https://github.com/Carthage/Carthage)
 Add the following to your `Cartfile`
 ````
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Just enable a single line of code
         // Supported UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
         //
-        // *** This doesn't work with UITableViewController because they've a built-in hander ***
+        // *** This doesn't work with UITableViewController because they've a built-in handler ***
         //
         CommonKeyboard.shared.enabled = true
 
@@ -128,6 +128,7 @@ Debugging
 
 
 // ** Sample output **
+
 /*
 ----- CommonKeyboard debug enabled -----
 - isShowing:  true
