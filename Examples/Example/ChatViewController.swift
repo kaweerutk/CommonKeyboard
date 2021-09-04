@@ -10,37 +10,46 @@ import UIKit
 import CommonKeyboard
 
 class ChatViewController: UIViewController {
+  @IBOutlet var tableView: UITableView!
+  @IBOutlet var textField: UITextField!
+  @IBOutlet var bottomConstraint: NSLayoutConstraint!
+  
+  lazy var keyboardObserver = CommonKeyboardObserver()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // drag down to dismiss keyboard
+    tableView.keyboardDismissMode = .interactive
     
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var textField: UITextField!
-    @IBOutlet var bottomConstraint: NSLayoutConstraint!
-    
-    lazy var keyboardObserver = CommonKeyboardObserver()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // drag down to dismiss keyboard
-        tableView.keyboardDismissMode = .interactive
-        
-        keyboardObserver.subscribe(events: [.willChangeFrame, .dragDown]) { [weak self] (info) in
-            guard let weakSelf = self else { return }
-            let bottom = (info.isShowing
-                ? (-info.visibleHeight) + weakSelf.view.backwardSafeAreaInsets.bottom
-                : 0
-            )
-            UIView.animate(info, animations: { [weak self] in
-                self?.bottomConstraint.constant = bottom
-                self?.view.layoutIfNeeded()
-            })
-        }
+    keyboardObserver.subscribe(events: [.willChangeFrame, .dragDown]) { [weak self] (info) in
+      guard let self = self else { return }
+      let bottom = info.isShowing
+        ? (-info.visibleHeight) + self.view.safeAreaInsets.bottom
+        : 0
+      UIView.animate(info, animations: { [weak self] in
+        self?.bottomConstraint.constant = bottom
+        self?.view.layoutIfNeeded()
+      })
     }
-    
+  }
 }
 
 extension ChatViewController: CommonKeyboardContainerProtocol {
-    // return specific scrollViewContainer
-    // UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
-    var scrollViewContainer: UIScrollView {
-        return tableView
+  // Return specific scrollViewContainer
+  // UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
+  //
+  // *** This doesn't work with UITableViewController because they have a built-in handler ***
+  //
+  var scrollViewContainer: UIScrollView {
+    return tableView
+  }
+}
+
+extension UIView {
+  var backwardSafeAreaInsets: UIEdgeInsets {
+    if #available(iOS 11, *) {
+      return safeAreaInsets
     }
+    return .zero
+  }
 }

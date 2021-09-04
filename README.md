@@ -34,13 +34,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         // Just enable a single line of code
+        // Supported UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
+        //
+        // *** This doesn't work with UITableViewController because they've a built-in hander ***
+        //
         CommonKeyboard.shared.enabled = true
 
         return true
     }
 }
 ```
-`CommonKeyboard` will automatically scroll to the input view when the cursor focused and tapping on a space to dismiss keyboard. This working with UIScrollView and all inheritance classes including UITableView and UICollectionView
+`CommonKeyboard` will automatically scroll to the input view when the cursor focused and tapping on a space to dismiss keyboard. This working with UIScrollView and all subclasses including UITableView and UICollectionView
 (<strong>Note:</strong> This does not support `UITableViewController` because it will handle by itself)
 
 Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
@@ -60,7 +64,6 @@ You can subscribe `CommonKeyboardObserver` to get keyboard notification info.
 import CommonKeyboard
 
 class ExampleChatViewController: UIViewController {
-
     @IBOutlet var tableView: UITableView!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     let keyboardObserver = CommonKeyboardObserver()
@@ -71,21 +74,16 @@ class ExampleChatViewController: UIViewController {
         tableView.keyboardDismissMode = .interactive
 
         keyboardObserver.subscribe(events: [.willChangeFrame, .dragDown]) { [weak self] (info) in
-            guard let weakSelf = self else { return }
-            var bottom = 0
-            if info.isShowing {
-                bottom = -info.visibleHeight
-                if #available(iOS 11, *) {
-                    bottom += weakSelf.view.safeAreaInsets.bottom
-                }
-            }
+            guard let self = self else { return }
+            let bottom = info.isShowing
+                ? (-info.visibleHeight) + self.view.safeAreaInsets.bottom
+                : 0
             UIView.animate(info, animations: { [weak self] in
                 self?.bottomConstraint.constant = bottom
                 self?.view.layoutIfNeeded()
             })
         }
     }
-
 }
 ```
 
@@ -102,7 +100,7 @@ public enum CommonKeyboardObserverEvent {
 }
 ```
 
-Sometimes there are many UIScrollView containers in UI Stack View and the CommonKeyboard cannot find the right one you can implement `CommonKeyboardContainerProtocol` and return specific container
+Sometimes there are many UIScrollView containers in UI Tree View and the CommonKeyboard cannot find the right one you can implement `CommonKeyboardContainerProtocol` and return specific container
 
 ```swift
 extension ExampleChatViewController: CommonKeyboardContainerProtocol {

@@ -13,7 +13,6 @@
 		AFB0821523254CF900C43B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFB0821323254CF900C43B29 /* LaunchScreen.storyboard */; };
 		AFB0821F2325560200C43B29 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB0821E2325560200C43B29 /* FormViewController.swift */; };
 		AFB082212325562500C43B29 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB082202325562400C43B29 /* ChatViewController.swift */; };
-		AFB082232325563C00C43B29 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB082222325563C00C43B29 /* Extensions.swift */; };
 		DB29B5E26EFBF325426BBC8E /* Pods_KeyboardExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5D4F872B07BFFDAFF46FE2 /* Pods_KeyboardExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +28,6 @@
 		AFB0821623254CF900C43B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFB0821E2325560200C43B29 /* FormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 		AFB082202325562400C43B29 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		AFB082222325563C00C43B29 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +74,6 @@
 				AFB0820A23254CF200C43B29 /* AppDelegate.swift */,
 				AFB0821E2325560200C43B29 /* FormViewController.swift */,
 				AFB082202325562400C43B29 /* ChatViewController.swift */,
-				AFB082222325563C00C43B29 /* Extensions.swift */,
 				AFB0820E23254CF200C43B29 /* Main.storyboard */,
 				AFB0821123254CF900C43B29 /* Assets.xcassets */,
 				AFB0821323254CF900C43B29 /* LaunchScreen.storyboard */,
@@ -212,7 +209,6 @@
 				AFB0821F2325560200C43B29 /* FormViewController.swift in Sources */,
 				AFB082212325562500C43B29 /* ChatViewController.swift in Sources */,
 				AFB0820B23254CF200C43B29 /* AppDelegate.swift in Sources */,
-				AFB082232325563C00C43B29 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
