@@ -153,7 +153,11 @@ internal class PanGestureWorker: NSObject, UIGestureRecognizerDelegate {
       } else {
         self.removeGesture()
       }
-      self.configureKeyboardAssistantView(info: info)
+      if #available(iOS 15, *) {
+        return
+      } else {
+        self.configureKeyboardAssistantView(info: info)
+      }
     }
   }
   
