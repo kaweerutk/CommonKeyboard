@@ -12,7 +12,7 @@ An elegant Keyboard library for iOS. simple, lightweight and standalone no sub-d
 #### [CocoaPods](https://cocoapods.org/)
 Add the following to your `Podfile`
 ````
-pod 'CommonKeyboard', :git => 'https://github.com/kaweerutk/CommonKeyboard.git', :tag => '1.0.6'
+pod 'CommonKeyboard', :git => 'https://github.com/kaweerutk/CommonKeyboard.git', :tag => '1.0.7'
 ````
 ***  Note: I lost my `cocoapods trunk` account because I cannot figure out what my yahoo email password is :( so you have to specify `:git` and `:tag` to get the latest version of the CommonKeyboard
 #### [Carthage](https://github.com/Carthage/Carthage)
