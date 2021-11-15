@@ -13,6 +13,10 @@ public protocol CommonKeyboardContainerProtocol: class {
 }
 
 public class CommonKeyboard: NSObject {
+  private enum Consts {
+    static let defaultAnimationDuration: TimeInterval = 0.2
+  }
+    
   public static let shared = CommonKeyboard()
   
   public var debug: Bool = false
@@ -138,9 +142,19 @@ public class CommonKeyboard: NSObject {
       : getScrollUpContentOffset(scrollContainer: scrollContainer, diff: diff)
     
     scrollContainer.contentInset = newContentInset
-    UIView.animate(keyboardInfo, animations: {
-      scrollContainer.setContentOffset(newContentOffset, animated: false)
-    })
+      
+    let animationDuration = keyboardInfo.animationDuration > 0
+      ? keyboardInfo.animationDuration
+      : Consts.defaultAnimationDuration
+      
+    UIView.animate(
+      withDuration: animationDuration,
+      delay: 0,
+      options: [UIView.AnimationOptions(rawValue: keyboardInfo.animationCurve)],
+      animations: {
+        scrollContainer.setContentOffset(newContentOffset, animated: false)
+      }
+    )
   }
   
   internal func getScrollDownContentOffset(
