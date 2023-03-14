@@ -36,7 +36,7 @@ class ChatViewController: UIViewController {
 
 extension ChatViewController: CommonKeyboardContainerProtocol {
   // Return specific scrollViewContainer
-  // UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
+  // as UIScrollView or an inherited class (e.g., UITableView or UICollectionView)
   //
   // *** This doesn't work with UITableViewController because they have a built-in handler ***
   //

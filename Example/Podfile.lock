@@ -1,0 +1,16 @@
+PODS:
+  - CommonKeyboard (1.0.8)
+
+DEPENDENCIES:
+  - CommonKeyboard (from `../`)
+
+EXTERNAL SOURCES:
+  CommonKeyboard:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CommonKeyboard: dffab782b7710416ae1e8224b98f387cc4690c09
+
+PODFILE CHECKSUM: c8da4f03a268688edc94286c58fa405fa5e869b5
+
+COCOAPODS: 1.11.3

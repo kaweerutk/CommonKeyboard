@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CommonKeyboardContainerProtocol: class {
+public protocol CommonKeyboardContainerProtocol: AnyObject {
   var scrollViewContainer: UIScrollView { get }
 }
 

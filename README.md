@@ -31,19 +31,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        // Just enable a single line of code
-        // Supported UIScrollView or a class that inherited from (e.g., UITableView or UICollectionView)
-        //
-        // *** This doesn't work with UITableViewController because they've a built-in handler ***
-        //
-        CommonKeyboard.shared.enabled = true
-
-        return true
-    }
+    // just enable this single line of code below
+    // supported UIScrollView including inherited classes (e.g., UITableView or UICollectionView)
+    //
+    // *** This doesn't work with UITableViewController because they've built-in handler ***
+    //
+    CommonKeyboard.shared.enabled = true
+    
+    // uncomment this line to print the debug logs
+    //CommonKeyboard.shared.debug = true
+      
+    return true
+  }
 }
 ```
-`CommonKeyboard` will automatically scroll to the input view when the cursor focused and tapping on a space to dismiss keyboard. This working with UIScrollView and all subclasses including UITableView and UICollectionView
+`CommonKeyboard` will automatically scroll to the input view when the cursor focused and tapping on on empty space to dismiss keyboard. This working with UIScrollView and all subclasses including UITableView and UICollectionView
 (<strong>Note:</strong> This does not support `UITableViewController` because it will handle by itself)
 
 Adjust an offset between keyboard and input view by set `keyboardOffset` the default value is 10, Or ignore common keyboard by giving `ignoredCommonKeyboard` a true value.
@@ -139,7 +141,7 @@ Debugging
 ------
 */
 
-// ** Sample output incase CommonKeyboard could not find `scrollContainer` **
+// ** Sample output when CommonKeyboard could not find `scrollContainer` **
 
 /*
  ----- CommonKeyboard debug enabled -----
@@ -160,8 +162,8 @@ Debugging
 ```
 
 ## Requirements
-- **iOS9** or later
-- **Swift 4.2** or later
+- **iOS12** or later
+- **Swift 5.0** or later
 
 ## Contact
 If you have any question or issue please create an [issue](https://github.com/kaweerutk/CommonKeyboard/issues/new)!
